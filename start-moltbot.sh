@@ -21,6 +21,7 @@ CONFIG_FILE="$CONFIG_DIR/openclaw.json"
 TEMPLATE_DIR="/root/.openclaw-templates"
 TEMPLATE_FILE="$TEMPLATE_DIR/moltbot.json.template"
 BACKUP_DIR="/data/moltbot"
+OPENCLAW_DATA_DIR="/root/.openclaw"
 
 echo "Config directory: $CONFIG_DIR"
 echo "Backup directory: $BACKUP_DIR"
@@ -76,7 +77,8 @@ if [ -f "$BACKUP_DIR/openclaw/openclaw.json" ]; then
     if should_restore_from_r2; then
         echo "Restoring from R2 backup at $BACKUP_DIR/openclaw..."
         cp -a "$BACKUP_DIR/openclaw/." "$CONFIG_DIR/"
-    elif [ -f "$BACKUP_DIR/openclaw.json" ]; then
+    fi
+elif [ -f "$BACKUP_DIR/openclaw.json" ]; then
     # Legacy backup format (flat structure)
     if should_restore_from_r2; then
         echo "Restoring from legacy R2 backup at $BACKUP_DIR..."
